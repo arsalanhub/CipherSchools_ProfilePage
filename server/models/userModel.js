@@ -30,6 +30,40 @@ const professionalSchema = new mongoose.Schema({
   },
 });
 
+const interestsSchema = new mongoose.Schema({
+    appDev: {
+        type: Boolean,
+        default: false
+    },
+    webDev: {
+        type: Boolean,
+        default: false
+    },
+    gameDev: {
+        type: Boolean,
+        default: false
+    },
+    dsa: {
+        type: Boolean,
+        default: false
+    },
+    programming: {
+        type: Boolean,
+        default: false
+    },
+    machineLearning: {
+        type: Boolean,
+        default: false
+
+    },
+    dataScience: {
+        type: Boolean
+    },
+    others: {
+        type: Boolean
+    }
+})
+
 const userSchema = new mongoose.Schema({
   first_name: {
     type: String,
@@ -66,7 +100,7 @@ const userSchema = new mongoose.Schema({
     type: Array,
   },
   interests: {
-    type: Array,
+    type: interestsSchema,
   },
 });
 
