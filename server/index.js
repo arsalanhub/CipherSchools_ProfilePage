@@ -29,6 +29,6 @@ app.use("/updateUser/personalInfo", personalInfo);
 app.use("/updateUser/password", password);
 app.use("/updateUser/interest", interest);
 
-app.listen(3000, (req, res) => {
-  console.log("Running on port 3000");
+app.listen(5000, (req, res) => {
+  console.log("Running on port 5000");
 });
