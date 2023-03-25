@@ -16,8 +16,6 @@ module.exports.about = async (req, res) => {
   return res.status(200).json({ data: updatedData, msg: "Data Updated" });
 };
 
-module.exports.personalInfo = (req, res) => {};
-
 module.exports.password = async (req, res) => {
     const { userId, cur_password, new_password } = req.body;
     const userData = await User.findById(userId);
@@ -66,4 +64,18 @@ module.exports.web = async (req, res) => {
         socials
     }, { new: true });
     return res.status(200).json({ data: updatedData, msg: "Web Updated" });
+};
+
+module.exports.personalInfo = async (req, res) => {
+    const { userId, highestEducation, currently } = req.body;
+    let userData = await User.findById(userId);
+    let professionalInfo = userData.professionalInfo;
+    professionalInfo = {
+        highestEducation: undefinedChk(highestEducation, professionalInfo?.highestEducation),
+        currently: undefinedChk(currently, professionalInfo?.currently),
+    }
+    let updatedData = await User.findByIdAndUpdate(userId, {
+        professionalInfo
+    }, { new: true });
+    return res.status(200).json({ data: updatedData, msg: "Professional Updated" });
 };
