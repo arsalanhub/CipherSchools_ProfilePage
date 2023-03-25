@@ -2,7 +2,25 @@ const User = require("../models/userModel");
 const bcrypt = require("bcrypt");
 const { undefinedChk } = require("../utils/routeHelper");
 
-module.exports.details = (req, res) => {};
+module.exports.details = async (req, res) => {
+    const userId = req.body.userId;
+    const first_name = req.body.first_name;
+    const last_name = req.body.last_name;
+    const email = req.body.email;
+    const phone = req.body.phone;
+    const filePath = req?.file?.path;
+    const image = filePath ? filePath.split("\\")[1] : null;
+
+    const userData = await User.findById(userId);
+    userData.first_name = first_name ? first_name : userData?.first_name;
+    userData.last_name = last_name ? last_name : userData?.last_name;
+    userData.email = email ? email : userData?.email;
+    userData.phone = phone ? phone : userData?.phone;
+    userData.image = image ? image : userData?.image;
+    
+    await userData.save();
+    return res.json({ data: userData, msg: "Profile Updated" });
+};
 
 module.exports.about = async (req, res) => {
   const { userId, about_me } = req.body;
