@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const socialsSchema = mongoose.Schema({
+const socialsSchema = new mongoose.Schema({
   linkedIn: {
     type: String,
   },
@@ -21,7 +21,7 @@ const socialsSchema = mongoose.Schema({
   },
 });
 
-const professionalSchema = mongoose.Schema({
+const professionalSchema = new mongoose.Schema({
   highestEducation: {
     type: String,
   },
@@ -30,7 +30,7 @@ const professionalSchema = mongoose.Schema({
   },
 });
 
-const userSchema = mongoose.Schema({
+const userSchema = new mongoose.Schema({
   first_name: {
     type: String,
     required: true,
@@ -70,4 +70,4 @@ const userSchema = mongoose.Schema({
   },
 });
 
-module.exports = new mongoose.model("User", userSchema);
+module.exports = mongoose.model("User", userSchema);
