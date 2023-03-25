@@ -1,5 +1,6 @@
 const User = require("../models/userModel");
 const bcrypt = require("bcrypt");
+const { socialsDefault, professionalDefault, interestsDefaut } = require("../utils/routeHelper");
 
 module.exports.loginRoute = async (req, res) => {
   const { email, password } = req.body;
@@ -30,6 +31,13 @@ module.exports.signupRoute = async (req, res) => {
     email,
     phone,
     password: encryptedPassword,
+    image: "",
+    about_me: "",
+    socials: socialsDefault,
+    professionalInfo: professionalDefault,
+    followers: [],
+    interests: interestsDefaut
   });
-  return res.status(200).json({ data: userData, msg: "User Created" });
+  let returnData = await User.findOne({ email });
+  return res.status(200).json({ data: returnData, msg: "User Created" });
 };

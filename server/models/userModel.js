@@ -3,27 +3,21 @@ const mongoose = require("mongoose");
 const socialsSchema = new mongoose.Schema({
   linkedIn: {
     type: String,
-    default: ""
   },
   gitHub: {
     type: String,
-    default: ""
   },
   twitter: {
     type: String,
-    default: ""
   },
   instagram: {
     type: String,
-    default: ""
   },
   facebook: {
     type: String,
-    default: ""
   },
   website: {
     type: String,
-    default: ""
   },
 });
 
@@ -39,34 +33,27 @@ const professionalSchema = new mongoose.Schema({
 const interestsSchema = new mongoose.Schema({
     appDev: {
         type: Boolean,
-        default: false
     },
     webDev: {
         type: Boolean,
-        default: false
     },
     gameDev: {
         type: Boolean,
-        default: false
     },
     dsa: {
         type: Boolean,
-        default: false
     },
     programming: {
         type: Boolean,
-        default: false
     },
     machineLearning: {
         type: Boolean,
-        default: false
-
     },
     dataScience: {
-        type: Boolean
+        type: Boolean,
     },
     others: {
-        type: Boolean
+        type: Boolean,
     }
 })
 
