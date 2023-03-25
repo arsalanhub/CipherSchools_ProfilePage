@@ -16,8 +16,6 @@ module.exports.about = async (req, res) => {
   return res.status(200).json({ data: updatedData, msg: "Data Updated" });
 };
 
-module.exports.web = (req, res) => {};
-
 module.exports.personalInfo = (req, res) => {};
 
 module.exports.password = async (req, res) => {
@@ -36,16 +34,36 @@ module.exports.interest = async (req, res) => {
     const { userId, appDev, webDev, gameDev, dsa, programming, machineLearning, dataScience, others } = req.body;
     let userData = await User.findById(userId);
     let interests = userData.interests;
-    interests.appDev = undefinedChk(appDev, interests.appDev);
-    interests.webDev = undefinedChk(webDev, interests.webDev);
-    interests.gameDev = undefinedChk(gameDev, interests.gameDev);
-    interests.dsa = undefinedChk(dsa, interests.dsa);
-    interests.programming = undefinedChk(programming, interests.programming);
-    interests.machineLearning = undefinedChk(machineLearning, interests.machineLearning);
-    interests.dataScience = undefinedChk(dataScience, interests.dataScience);
-    interests.others = undefinedChk(others, interests.others);
+    interests = {
+        appDev: undefinedChk(appDev, interests?.appDev),
+        webDev: undefinedChk(webDev, interests?.webDev),
+        gameDev: undefinedChk(gameDev, interests?.gameDev),
+        dsa: undefinedChk(dsa, interests?.dsa),
+        programming: undefinedChk(programming, interests?.programming),
+        machineLearning: undefinedChk(machineLearning, interests?.machineLearning),
+        dataScience: undefinedChk(dataScience, interests?.dataScience),
+        others: undefinedChk(others, interests?.others)
+    }
     let updatedData = await User.findByIdAndUpdate(userId, {
         interests
     }, { new: true });
     return res.status(200).json({ data: updatedData, msg: "Interest Updated" });
+};
+
+module.exports.web = async (req, res) => {
+    const { userId, linkedIn, gitHub, twitter, instagram, facebook, website } = req.body;
+    let userData = await User.findById(userId);
+    let socials = userData.socials;
+    socials = {
+        linkedIn: undefinedChk(linkedIn, socials?.linkedIn),
+        gitHub: undefinedChk(gitHub, socials?.gitHub),
+        twitter: undefinedChk(twitter, socials?.twitter),
+        instagram: undefinedChk(instagram, socials?.instagram),
+        facebook: undefinedChk(facebook, socials?.facebook),
+        website: undefinedChk(website, socials?.website),
+    }
+    let updatedData = await User.findByIdAndUpdate(userId, {
+        socials
+    }, { new: true });
+    return res.status(200).json({ data: updatedData, msg: "Web Updated" });
 };

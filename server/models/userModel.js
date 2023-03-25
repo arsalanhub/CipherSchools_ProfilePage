@@ -3,21 +3,27 @@ const mongoose = require("mongoose");
 const socialsSchema = new mongoose.Schema({
   linkedIn: {
     type: String,
+    default: ""
   },
   gitHub: {
     type: String,
+    default: ""
   },
   twitter: {
     type: String,
+    default: ""
   },
   instagram: {
     type: String,
+    default: ""
   },
   facebook: {
     type: String,
+    default: ""
   },
   website: {
     type: String,
+    default: ""
   },
 });
 
