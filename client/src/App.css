@@ -62,7 +62,6 @@
   background-repeat: no-repeat;
   background-size: cover;
   height: 6rem;
-  width: 100%;
   padding: 0.5rem;
   display: flex;
 }
@@ -150,9 +149,52 @@
 }
 
 .underline {
-  background: rgba(10,30,50,.1);
+  background: rgba(10, 30, 50, 0.1);
   border-radius: 0.5px;
   height: 1px;
   margin: 1.5rem 0 1rem;
+  width: 100%;
+}
+
+.socialWrapper {
+  /* display: flex; */
+  width: 100%;
+}
+
+.socialEle {
+  width: 49%;
+  margin: 0.5rem;
+}
+
+.socialRow {
+  display: flex;
+  width: 100%;
+}
+
+.socialText {
+  font-size: 15px;
+  font-weight: 550;
+  line-height: 1.5;
+}
+
+.socialInputBox {
+  background-color: white;
+  border-radius: 8px;
+  display: flex;
+  margin-top: 4px;
+  padding: 0.5rem 1rem;
+}
+
+.socialImg {
+  padding-right: 5px;
+}
+
+.socialInput {
+  background: transparent;
+  border: none;
+  /* color: var(--paragraph); */
+  font-size: 14px;
+  font-weight: 550;
+  line-height: 1.5;
   width: 100%;
 }
