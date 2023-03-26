@@ -25,7 +25,7 @@
 }
 
 .navbarSearchBox {
-  background-color: #F2F5FA;
+  background-color: #f2f5fa;
   padding: 0.5rem;
   border-radius: 1.5rem;
   margin-top: 11px;
@@ -36,7 +36,7 @@
 
 .navSearchInput {
   border: none;
-  background-color: #F2F5FA;
+  background-color: #f2f5fa;
   width: 100%;
 }
 
@@ -76,4 +76,15 @@
   padding: 0.5rem;
   justify-content: center;
   width: 4%;
+}
+
+.rightSideBarEle {
+  display: flex;
+  height: 45px;
+  margin: 5px auto;
+  display: flex;
+  box-sizing: border-box;
+  border-radius: 10px;
+  padding-left: 16px;
+  padding-right: 16px;
 }
