@@ -1,6 +1,7 @@
 import React from 'react'
 import AboutMe from './userDetails/AboutMe'
 import OnTheWeb from './userDetails/OnTheWeb'
+import PasswordSecurity from './userDetails/PasswordSecurity'
 import ProfessionalInformation from './userDetails/ProfessionalInformation'
 
 export default function UserDetails() {
@@ -9,6 +10,7 @@ export default function UserDetails() {
         <AboutMe />
         <OnTheWeb />
         <ProfessionalInformation />
+        <PasswordSecurity />
     </div>
   )
 }
