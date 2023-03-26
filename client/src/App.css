@@ -4,8 +4,7 @@
   padding: 0.5rem 0.5rem 0rem 0.5rem;
   display: flex;
   border-bottom: 1px solid #d4d4d4;
-  position: fixed;
-  width: 100%;
+  width: 99%;
 }
 
 .navbarBrand {
@@ -44,4 +43,16 @@
 .navbarRight {
   display: flex;
   margin-left: 56rem;
+}
+
+.sidebarWrapper {
+  text-align: center;
+  border-right: 1px solid #d1d1d1;
+  padding: 0.5rem;
+  height: 89vh;
+  width: 4%;
+}
+
+.sideBarElements {
+  margin-bottom: 0.5rem;
 }
