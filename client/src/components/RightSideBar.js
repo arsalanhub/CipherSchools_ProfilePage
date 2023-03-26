@@ -14,7 +14,7 @@ export default function RightSideBar() {
     { title: "Liked Videos", img: <ThumbUpAltIcon />, selected: "white" },
   ];
   return (
-    <div style={{ backgroundColor: "white", marginTop: "1rem", height: "73vh", width: "13%" }}>
+    <div style={{ backgroundColor: "white", marginTop: "1rem", width: "13%" }}>
       {sideBarElement.map((ele) => {
         return (
           <div className="rightSideBarEle" style={{ backgroundColor: ele.selected }}>

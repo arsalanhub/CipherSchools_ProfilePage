@@ -93,6 +93,7 @@ export default function OnTheWeb() {
             </div>
         </div>
       </div>
+      <div className="underline"></div>
     </div>
   );
 }

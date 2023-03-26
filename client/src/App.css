@@ -91,6 +91,10 @@
 .userDetailsWrapper {
   width: 87%;
   padding: 2rem;
+  border-right: 1px solid #d1d1d1;
+  border-left: 1px solid #d1d1d1;
+  max-height: 35rem;
+  overflow-y: scroll;
 }
 
 .userDetailsHeading {
@@ -171,13 +175,13 @@
   width: 100%;
 }
 
-.socialText {
+.socialText, .professionalText{
   font-size: 15px;
   font-weight: 550;
   line-height: 1.5;
 }
 
-.socialInputBox {
+.socialInputBox, .professionalOptn {
   background-color: white;
   border-radius: 8px;
   display: flex;
@@ -197,4 +201,18 @@
   font-weight: 550;
   line-height: 1.5;
   width: 100%;
+}
+
+.professionalOptn {
+  width: 96%;
+}
+
+.professionalWrapper {
+  display: flex;
+  width: 100%;
+}
+
+.professionalEle {
+  width: 50%;
+  margin: 0.5rem;
 }
