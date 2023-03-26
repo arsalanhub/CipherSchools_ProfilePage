@@ -8,7 +8,7 @@ function App() {
   return (
     <>
       <Navbar />
-      <div style={{ display: "flex" }}>
+      <div style={{ display: "flex", height: "88.5vh" }}>
         <Sidebar />
         <MainSection />
       </div>

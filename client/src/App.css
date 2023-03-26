@@ -49,10 +49,31 @@
   text-align: center;
   border-right: 1px solid #d1d1d1;
   padding: 0.5rem;
-  height: 89vh;
   width: 4%;
 }
 
 .sideBarElements {
   margin-bottom: 0.5rem;
+}
+
+.detailsWrapper {
+  background-image: url(https://www.cipherschools.com/static/media/ProfileCover.e525f2d51356332792cb.png);
+  background-position: 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 6rem;
+  width: 100%;
+  padding: 0.5rem;
+  display: flex;
+}
+
+.profileImage {
+  background-color: #999999;
+  height: 4rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  padding: 0.5rem;
+  justify-content: center;
+  width: 4%;
 }

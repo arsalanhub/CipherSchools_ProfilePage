@@ -1,7 +1,10 @@
 import React from 'react'
+import DetailsSection from './DetailsSection'
 
 export default function ProfileSection() {
   return (
-    <div>ProfileSection</div>
+    <div>
+        <DetailsSection />
+    </div>
   )
 }
