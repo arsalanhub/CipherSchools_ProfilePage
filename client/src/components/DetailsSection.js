@@ -1,6 +1,13 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 export default function DetailsSection() {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  useEffect(() => {
+    let userData = JSON.parse(localStorage.getItem("userData"));
+    setName(userData.first_name);
+    setEmail(userData.email);
+  }, [])
   return (
     <div className="detailsWrapper">
       <div className="profileImage">
@@ -24,9 +31,9 @@ export default function DetailsSection() {
         >
           Hello
         </h2>
-        <h1 style={{ fontSize: "24px", margin: "0" }}>Mohammad Arsalan</h1>
+        <h1 style={{ fontSize: "24px", margin: "0" }}>{name && name}</h1>
         <h2 style={{ fontSize: "16px", fontWeight: "400", margin: "0" }}>
-          arsalanmohd237@gmail.com
+        {email && email}
         </h2>
       </div>
       <div
