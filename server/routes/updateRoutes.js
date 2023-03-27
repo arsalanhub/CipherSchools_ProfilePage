@@ -37,6 +37,7 @@ module.exports.about = async (req, res) => {
 module.exports.password = async (req, res) => {
     const { userId, cur_password, new_password } = req.body;
     const userData = await User.findById(userId);
+    console.log(userData)
     let passwordChk = await bcrypt.compare(cur_password, userData.password);
     if(!passwordChk) return res.status(200).json({ data: [], msg: "Invalid Password" });
     let encryptedPassword = await bcrypt.hash(new_password, 10);
