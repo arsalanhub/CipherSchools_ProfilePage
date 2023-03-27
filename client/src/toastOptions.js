@@ -5,4 +5,4 @@ export const toastOptions = {
     draggable: true,
     theme: "dark",
     closeButton: false,
-  };
+  };  

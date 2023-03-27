@@ -1,15 +1,47 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 export default function OnTheWeb() {
   const [disable, setDisable] = useState(true);
+  const [linkedIn, setLinkedIn] = useState(null);
+  const [gitHub, setGitHub] = useState(null);
+  const [facebook, setFacebook] = useState(null);
+  const [twitter, setTwitter] = useState(null);
+  const [instagram, setInstagram] = useState(null);
+  const [website, setWebsite] = useState(null);
   const socialObj = [
-    { text: "Linkedin", img: <img src="https://www.cipherschools.com/static/media/LinkedIn.297c3e0e0411d3b8a7946c85a72f2bc7.svg" /> },
+    { text: "Linkedin", img: <img src="https://www.cipherschools.com/static/media/LinkedIn.297c3e0e0411d3b8a7946c85a72f2bc7.svg" />},
     { text: "GitHub", img: <img src="https://www.cipherschools.com/static/media/Github.2d6b6c0c10a3b3aa7e3c7438770688f8.svg" /> },
     { text: "Facebook", img: <img src="https://www.cipherschools.com/static/media/Facebook.766939726b802e2c4354f9629feba07f.svg" /> },   
     { text: "Twitter", img: <img src="https://www.cipherschools.com/static/media/Twitter.8dec5dacebf84c0be8bcaa33dee4a7a0.svg" /> },
     { text: "Instagram", img: <img src="https://www.cipherschools.com/static/media/Instagram.31ac5927c40b6d948dc3369a313cb7c9.svg" /> },
     { text: "Website", img: <img src="https://www.cipherschools.com/static/media/Website.cd72366beefca5afbc5259237cf87838.svg" /> },
   ]
+  const clickHandler = async () => {
+    setDisable(!disable)
+    if(!disable) {
+        let userId = JSON.parse(localStorage.getItem("userData"))._id;
+        let { data } = await axios.post("http://localhost:5000/updateUser/web", {
+            userId,
+            linkedIn,
+            gitHub,
+            facebook,
+            twitter,
+            instagram,
+            website
+        })
+        localStorage.setItem("userData", JSON.stringify(data.data));
+    }
+  }
+  useEffect(() => {
+    let userData = JSON.parse(localStorage.getItem("userData"));
+    let socials = userData.socials;
+    setLinkedIn(socials.linkedIn);
+    setGitHub(socials.gitHub);
+    setTwitter(socials.twitter);
+    setInstagram(socials.instagram);
+    setFacebook(socials.facebook);
+  }, [])
   return (
     <div>
       <div
@@ -21,7 +53,7 @@ export default function OnTheWeb() {
         }}
       >
         <div className="userDetailsHeading">On The Web</div>
-        <div className="btnClass" onClick={() => setDisable(!disable)}>
+        <div className="btnClass" onClick={() => clickHandler()}>
           {disable ? "Edit" : "Save"}
         </div>
       </div>
@@ -31,7 +63,7 @@ export default function OnTheWeb() {
                 <div className="socialText">{socialObj[0].text}</div>
                 <div className="socialInputBox">
                     <span className="socialImg">{socialObj[0].img}</span>
-                    <input type="text" placeholder={socialObj[0].text} className="socialInput" disabled={disable} />
+                    <input type="text" placeholder={socialObj[0].text} className="socialInput" disabled={disable} value={linkedIn===null ? "" : linkedIn} onChange={(e)=>setLinkedIn(e.target.value)} />
                     { !disable && <span className="pencilClass">
                         <img src="https://www.cipherschools.com/static/media/Pencil.da4ca677ddf0145e7203662a76a85ad5.svg" />
                     </span>}
@@ -41,7 +73,7 @@ export default function OnTheWeb() {
                 <div className="socialText">{socialObj[1].text}</div>
                 <div className="socialInputBox">
                     <span className="socialImg">{socialObj[1].img}</span>
-                    <input type="text" placeholder={socialObj[1].text} className="socialInput" disabled={disable} />
+                    <input type="text" placeholder={socialObj[1].text} className="socialInput" disabled={disable} value={gitHub===null ? "" : gitHub} onChange={(e)=>setGitHub(e.target.value)} />
                     { !disable && <span className="pencilClass">
                         <img src="https://www.cipherschools.com/static/media/Pencil.da4ca677ddf0145e7203662a76a85ad5.svg" />
                     </span>}
@@ -53,7 +85,7 @@ export default function OnTheWeb() {
                 <div className="socialText">{socialObj[2].text}</div>
                 <div className="socialInputBox">
                     <span className="socialImg">{socialObj[2].img}</span>
-                    <input type="text" placeholder={socialObj[2].text} className="socialInput" disabled={disable} />
+                    <input type="text" placeholder={socialObj[2].text} className="socialInput" disabled={disable} value={facebook===null ? "" : facebook} onChange={(e)=>setFacebook(e.target.value)} />
                     { !disable && <span className="pencilClass">
                         <img src="https://www.cipherschools.com/static/media/Pencil.da4ca677ddf0145e7203662a76a85ad5.svg" />
                     </span>}
@@ -63,7 +95,7 @@ export default function OnTheWeb() {
                 <div className="socialText">{socialObj[3].text}</div>
                 <div className="socialInputBox">
                     <span className="socialImg">{socialObj[3].img}</span>
-                    <input type="text" placeholder={socialObj[3].text} className="socialInput" disabled={disable} />
+                    <input type="text" placeholder={socialObj[3].text} className="socialInput" disabled={disable} value={twitter===null ? "" : twitter} onChange={(e)=>setTwitter(e.target.value)}/>
                     { !disable && <span className="pencilClass">
                         <img src="https://www.cipherschools.com/static/media/Pencil.da4ca677ddf0145e7203662a76a85ad5.svg" />
                     </span>}
@@ -75,7 +107,7 @@ export default function OnTheWeb() {
                 <div className="socialText">{socialObj[4].text}</div>
                 <div className="socialInputBox">
                     <span className="socialImg">{socialObj[4].img}</span>
-                    <input type="text" placeholder={socialObj[4].text} className="socialInput" disabled={disable} />
+                    <input type="text" placeholder={socialObj[4].text} className="socialInput" disabled={disable} value={instagram===null ? "" : instagram} onChange={(e)=>setInstagram(e.target.value)}/>
                     { !disable && <span className="pencilClass">
                         <img src="https://www.cipherschools.com/static/media/Pencil.da4ca677ddf0145e7203662a76a85ad5.svg" />
                     </span>}
@@ -85,7 +117,7 @@ export default function OnTheWeb() {
                 <div className="socialText">{socialObj[5].text}</div>
                 <div className="socialInputBox">
                     <span className="socialImg">{socialObj[5].img}</span>
-                    <input type="text" placeholder={socialObj[5].text} className="socialInput" disabled={disable} />
+                    <input type="text" placeholder={socialObj[5].text} className="socialInput" disabled={disable} value={website===null ? "" : website} onChange={(e)=>setWebsite(e.target.value)}/>
                     { !disable && <span className="pencilClass">
                         <img src="https://www.cipherschools.com/static/media/Pencil.da4ca677ddf0145e7203662a76a85ad5.svg" />
                     </span>}
@@ -97,3 +129,4 @@ export default function OnTheWeb() {
     </div>
   );
 }
+
