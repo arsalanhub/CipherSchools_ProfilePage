@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
+import SimpleDialogDemo from "./DialogBox";
 
 export default function DetailsSection() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [display, setDisplay] = useState(false);
   useEffect(() => {
     let userData = JSON.parse(localStorage.getItem("userData"));
     setName(userData.first_name);
@@ -10,7 +12,8 @@ export default function DetailsSection() {
   }, [])
   return (
     <div className="detailsWrapper">
-      <div className="profileImage">
+      {display && <SimpleDialogDemo setDisplay={setDisplay} pageName="profileUpdate" /> }
+      <div className="profileImage" onClick={()=> setDisplay(true)}>
         <svg
           class="MuiSvgIcon-root MuiAvatar-fallback"
           focusable="false"
