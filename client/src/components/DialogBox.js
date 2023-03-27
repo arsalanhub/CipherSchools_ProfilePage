@@ -29,7 +29,7 @@ function SimpleDialog(props) {
                 </div>
             </div>
             <div className="dialogButton">
-                <div className="cancel-btn">Cancel</div>
+                <div className="cancel-btn" onClick={()=>setDisplay(false)}>Cancel</div>
                 <div className="save-btn">Save</div>
             </div>
         </Dialog>

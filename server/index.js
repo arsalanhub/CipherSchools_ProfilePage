@@ -2,11 +2,13 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const env = require("dotenv");
+const cors = require("cors");
 const { loginRoute, signupRoute } = require("./routes/authentication");
 const { details, about, web, personalInfo, password, interest } = require("./routes/updateRoutes");
 const { profileUpload } = require("./utils/multerConfig");
 const app = express();
 app.use(express.json());
+app.use(cors());
 
 mongoose
   .connect(process.env.DB_URL, {
