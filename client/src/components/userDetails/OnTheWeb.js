@@ -21,7 +21,7 @@ export default function OnTheWeb() {
     setDisable(!disable)
     if(!disable) {
         let userId = JSON.parse(localStorage.getItem("userData"))._id;
-        let { data } = await axios.post("http://localhost:5000/updateUser/web", {
+        let { data } = await axios.post(`${process.env.REACT_APP_SERVER_URL}/updateUser/web`, {
             userId,
             linkedIn,
             gitHub,

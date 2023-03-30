@@ -10,7 +10,7 @@ export default function ProfessionalInformation() {
     setDisable(!disable);
     if(!disable) {
       let userId = JSON.parse(localStorage.getItem("userData"))._id;
-      let { data } = await axios.post("http://localhost:5000/updateUser/personalInfo", {
+      let { data } = await axios.post(`${process.env.REACT_APP_SERVER_URL}/updateUser/personalInfo`, {
         userId, 
         highestEducation: education,
         currently

@@ -8,7 +8,7 @@ export default function AboutMe() {
     setDisable(!disable);
     if(!disable) {
       let userId = JSON.parse(localStorage.getItem("userData"))._id;
-      let { data } = await axios.post("http://localhost:5000/updateUser/about", {
+      let { data } = await axios.post(`${process.env.REACT_APP_SERVER_URL}/updateUser/about`, {
         userId,
         about_me: text
       })

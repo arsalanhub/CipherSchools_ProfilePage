@@ -47,7 +47,7 @@ function SimpleDialog(props) {
     else {
       let userId = JSON.parse(localStorage.getItem("userData"))._id;
       let { data } = await axios.post(
-        "http://localhost:5000/updateUser/password",
+        `${process.env.REACT_APP_SERVER_URL}/updateUser/password`,
         {
           userId,
           cur_password: curPassword,
@@ -73,7 +73,7 @@ function SimpleDialog(props) {
     formData.append("email", email);
     formData.append("phone", phone);
     formData.append("profile", image)
-    let { data } = await axios.post("http://localhost:5000/updateUser/details", formData, {
+    let { data } = await axios.post(`${process.env.REACT_APP_SERVER_URL}/updateUser/details`, formData, {
       headers: {
         'content-type': 'multipart/form-data'
       }
@@ -86,7 +86,7 @@ function SimpleDialog(props) {
 
   const saveInterests = async () => {
     let userId = JSON.parse(localStorage.getItem("userData"))._id;
-    let { data }  = await axios.post("http://localhost:5000/updateUser/interest", {
+    let { data }  = await axios.post(`${process.env.REACT_APP_SERVER_URL}/updateUser/interest`, {
       userId,
       appDev, 
       dataScience,

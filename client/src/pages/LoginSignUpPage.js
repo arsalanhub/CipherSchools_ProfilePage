@@ -26,7 +26,7 @@ export default function LoginSignUpPage() {
   }, [])
 
   const loginHandler = async () => {
-    let { data } = await axios.post("http://localhost:5000/login", {
+    let { data } = await axios.post(`${process.env.REACT_APP_SERVER_URL}/login`, {
       email,
       password,
     });
@@ -34,7 +34,7 @@ export default function LoginSignUpPage() {
     navigate("/profile");
   };
   const signUpHandler = async () => {
-    let { data } = await axios.post("http://localhost:5000/signup", {
+    let { data } = await axios.post(`${process.env.REACT_APP_SERVER_URL}/signup`, {
       first_name: firstName,
       last_name: lastName,
       email,
