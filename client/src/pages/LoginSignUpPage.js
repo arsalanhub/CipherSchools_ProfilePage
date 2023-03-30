@@ -2,6 +2,15 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
+const Description = () => {
+  return(
+  <div className="description">
+        <div style={{ borderBottom: "1px solid" }}>Description</div>
+        <div>1. This is simple profile page / dashboard for user.</div>
+        <div>2. If you are new then singup or use this credential to explore platform. <span style={{ fontWeight: "700" }}>(arsalanmohd237@gmail.com, 123456789)</span></div>
+  </div>
+  )
+}
 export default function LoginSignUpPage() {
   const navigate = useNavigate();
   const [isLoginPage, setIsLoginPage] = useState(true);
@@ -38,6 +47,7 @@ export default function LoginSignUpPage() {
   if (isLoginPage) {
     return (
       <>
+      <div className="loginSignupWrapper">
         <div>Login Page</div>
         <input
           type="email"
@@ -49,11 +59,14 @@ export default function LoginSignUpPage() {
         <a href="#" onClick={() => setIsLoginPage(false)}>
           Signup
         </a>
+      </div>
+      <Description />
       </>
     );
   } else {
     return (
       <>
+      <div className="loginSignupWrapper"> 
         <div>Signup Page</div>
         <input
           type="text"
@@ -84,6 +97,8 @@ export default function LoginSignUpPage() {
         <a href="#" onClick={() => setIsLoginPage(true)}>
           Login
         </a>
+      </div>
+      <Description />
       </>
     );
   }
