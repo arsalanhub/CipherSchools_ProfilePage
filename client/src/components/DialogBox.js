@@ -6,7 +6,7 @@ import { toastOptions } from "../toastOptions";
 import axios from "axios";
 
 function SimpleDialog(props) {
-  const { open, setDisplay, pageName } = props;
+  const { open, setDisplay, pageName, setInterestsData } = props;
   const [curPassword, setCurPassword] = React.useState("");
   const [newPassword, setNewPassword] = React.useState("");
   const [confirmPassword, setConfirmPassword] = React.useState("");
@@ -14,14 +14,30 @@ function SimpleDialog(props) {
   const [lastName, setLastName] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [phone, setPhone] = React.useState("");
-  const [showToast, setShowToast] = React.useState(false);
+  const [appDev, setAppDev] = React.useState(false);
+  const [dataScience, setDataScience] = React.useState(false);
+  const [dsa, setDsa] = React.useState(false);
+  const [gameDev, setGameDev] = React.useState(false);
+  const [machineLearning, setMachineLearning] = React.useState(false);
+  const [others, setOthers] = React.useState(false);
+  const [programming, setProgramming] = React.useState(false);
+  const [webDev, setWebDev] = React.useState(false);
 
   React.useEffect(() => {
     let userData = JSON.parse(localStorage.getItem("userData"));
+    let interests = userData.interests;
     setFirstName(userData.first_name);
     setLastName(userData.last_name);
     setEmail(userData.email);
     setPhone(userData.phone!==null ? userData.phone : "");
+    setAppDev(interests.appDev);
+    setDataScience(interests.dataScience);
+    setDsa(interests.dsa);
+    setGameDev(interests.gameDev);
+    setMachineLearning(interests.machineLearning);
+    setOthers(interests.others);
+    setProgramming(interests.programming);
+    setWebDev(interests.webDev);
   }, []);
 
   const savePassword = async () => {
@@ -62,6 +78,23 @@ function SimpleDialog(props) {
     });
     localStorage.setItem("userData", JSON.stringify(data.data));
     toast.success(data.msg, toastOptions);
+  }
+
+  const saveInterests = async () => {
+    let userId = JSON.parse(localStorage.getItem("userData"))._id;
+    let { data }  = await axios.post("http://localhost:5000/updateUser/interest", {
+      userId,
+      appDev, 
+      dataScience,
+      dsa,
+      gameDev,
+      machineLearning,
+      others,
+      programming,
+      webDev,
+    })
+    localStorage.setItem("userData", JSON.stringify(data.data));
+    setInterestsData(data.data.interests);
   }
 
   if (pageName === "Password") {
@@ -196,9 +229,53 @@ function SimpleDialog(props) {
       </Dialog>
     );
   }
+  else if (pageName === "Interests") {
+    return (
+      <Dialog
+        onClose={() => setDisplay(false)}
+        open={open}
+        className="dialogBoxClass"
+      >
+        <div className="interestItem">
+          <div className="interestElement" style={{ backgroundColor: appDev ? "#f3912e" : "#f2f5fa"}} onClick={()=> setAppDev(!appDev)}>
+            App Development
+          </div>
+          <div className="interestElement" style={{ backgroundColor: webDev ? "#f3912e" : "#f2f5fa"}} onClick={()=> setWebDev(!webDev)}>
+            Web Development
+          </div>
+          <div className="interestElement" style={{ backgroundColor: gameDev ? "#f3912e" : "#f2f5fa"}} onClick={()=> setGameDev(!gameDev)}>
+            Game Development
+          </div>
+          <div className="interestElement" style={{ backgroundColor: dsa ? "#f3912e" : "#f2f5fa"}} onClick={()=> setDsa(!dsa)}>
+            Data Structures
+          </div>
+          <div className="interestElement" style={{ backgroundColor: programming ? "#f3912e" : "#f2f5fa"}} onClick={()=> setProgramming(!programming)}>
+            Programming
+          </div>  
+          <div className="interestElement" style={{ backgroundColor: machineLearning ? "#f3912e" : "#f2f5fa"}} onClick={()=> setMachineLearning(!machineLearning)}>
+            Machine Learning
+          </div>
+          <div className="interestElement" style={{ backgroundColor: dataScience ? "#f3912e" : "#f2f5fa"}} onClick={()=> setDataScience(!dataScience)}>
+            Data Science
+          </div>  
+          <div className="interestElement" style={{ backgroundColor: others ? "#f3912e" : "#f2f5fa"}} onClick={()=> setOthers(!others)}>
+            Others
+          </div>  
+        </div>
+        <div className="dialogButton">
+          <div className="cancel-btn" onClick={() => setDisplay(false)}>
+            Cancel
+          </div>
+          <div className="save-btn" onClick={()=>saveInterests()}>
+            Save
+          </div>
+              </div>
+      </Dialog>
+    )
+  }
 }
 
-export default function SimpleDialogDemo({ pageName, setDisplay }) {
+export default function SimpleDialogDemo({ pageName, setDisplay, setInterestsData }) {
   return (
     <div>
       <SimpleDialog
@@ -206,6 +283,7 @@ export default function SimpleDialogDemo({ pageName, setDisplay }) {
         onClose={() => setDisplay(false)}
         setDisplay={setDisplay}
         pageName={pageName}
+        setInterestsData={setInterestsData}
       />
     </div>
   );
