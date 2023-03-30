@@ -14,13 +14,14 @@ function SimpleDialog(props) {
   const [lastName, setLastName] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [phone, setPhone] = React.useState("");
+  const [showToast, setShowToast] = React.useState(false);
 
   React.useEffect(() => {
     let userData = JSON.parse(localStorage.getItem("userData"));
     setFirstName(userData.first_name);
     setLastName(userData.last_name);
     setEmail(userData.email);
-    setPhone(userData.phone);
+    setPhone(userData.phone!==null ? userData.phone : "");
   }, []);
 
   const savePassword = async () => {
@@ -45,6 +46,24 @@ function SimpleDialog(props) {
       }
     }
   };
+
+  const saveUserDetails = async () => {
+    let userId = JSON.parse(localStorage.getItem("userData"))._id
+    let formData = new FormData();
+    formData.append("userId", userId);
+    formData.append("first_name", firstName);
+    formData.append("last_name", lastName);
+    formData.append("email", email);
+    formData.append("phone", phone);
+    let { data } = await axios.post("http://localhost:5000/updateUser/details", formData, {
+      headers: {
+        'content-type': 'multipart/form-data'
+      }
+    });
+    localStorage.setItem("userData", JSON.stringify(data.data));
+    toast.success(data.msg, toastOptions);
+  }
+
   if (pageName === "Password") {
     return (
       <Dialog
@@ -135,6 +154,7 @@ function SimpleDialog(props) {
                 className="dialogBoxDetail"
                 placeholder="First Name"
                 value={firstName}
+                onChange={(e)=>setFirstName(e.target.value)}
               />
               <div className="detailDialogtext">Last Name</div>
               <input
@@ -142,6 +162,7 @@ function SimpleDialog(props) {
                 className="dialogBoxDetail"
                 placeholder="Last Name"
                 value={lastName}
+                onChange={(e)=>setLastName(e.target.value)}
               />
               <div className="detailDialogtext">Email Address</div>
               <input
@@ -150,6 +171,7 @@ function SimpleDialog(props) {
                 placeholder="Email Address"
                 disabled
                 value={email}
+                onChange={(e)=>setEmail(e.target.value)}
               />
               <div className="detailDialogtext">Mobile Number</div>
               <input
@@ -157,12 +179,13 @@ function SimpleDialog(props) {
                 className="dialogBoxDetail"
                 placeholder="Mobile Number"
                 value={phone}
+                onChange={(e)=>setPhone(e.target.value)}
               />
               <div className="dialogButton">
                 <div className="cancel-btn" onClick={() => setDisplay(false)}>
                   Cancel
                 </div>
-                <div className="save-btn" onClick={() => savePassword()}>
+                <div className="save-btn" onClick={() => saveUserDetails()}>
                   Save
                 </div>
               </div>
