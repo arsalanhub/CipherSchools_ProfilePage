@@ -6,7 +6,7 @@ import { toastOptions } from "../toastOptions";
 import axios from "axios";
 
 function SimpleDialog(props) {
-  const { open, setDisplay, pageName, setInterestsData } = props;
+  const { open, setDisplay, pageName, setInterestsData, setName, setUserImage } = props;
   const [curPassword, setCurPassword] = React.useState("");
   const [newPassword, setNewPassword] = React.useState("");
   const [confirmPassword, setConfirmPassword] = React.useState("");
@@ -22,6 +22,7 @@ function SimpleDialog(props) {
   const [others, setOthers] = React.useState(false);
   const [programming, setProgramming] = React.useState(false);
   const [webDev, setWebDev] = React.useState(false);
+  const [image, setImage] = React.useState("");
 
   React.useEffect(() => {
     let userData = JSON.parse(localStorage.getItem("userData"));
@@ -71,12 +72,15 @@ function SimpleDialog(props) {
     formData.append("last_name", lastName);
     formData.append("email", email);
     formData.append("phone", phone);
+    formData.append("profile", image)
     let { data } = await axios.post("http://localhost:5000/updateUser/details", formData, {
       headers: {
         'content-type': 'multipart/form-data'
       }
     });
     localStorage.setItem("userData", JSON.stringify(data.data));
+    setName(data.data.first_name);
+    setUserImage(data.data.image);
     toast.success(data.msg, toastOptions);
   }
 
@@ -178,6 +182,7 @@ function SimpleDialog(props) {
             >
               <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"></path>
             </svg>
+            <input type="file" onChange={(e)=>setImage(e.target.files[0])} />
           </div>
           <div>
             <div>
@@ -275,7 +280,7 @@ function SimpleDialog(props) {
   }
 }
 
-export default function SimpleDialogDemo({ pageName, setDisplay, setInterestsData }) {
+export default function SimpleDialogDemo({ pageName, setDisplay, setInterestsData, setName, setUserImage }) {
   return (
     <div>
       <SimpleDialog
@@ -284,6 +289,8 @@ export default function SimpleDialogDemo({ pageName, setDisplay, setInterestsDat
         setDisplay={setDisplay}
         pageName={pageName}
         setInterestsData={setInterestsData}
+        setName={setName}
+        setUserImage={setUserImage}
       />
     </div>
   );

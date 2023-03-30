@@ -5,16 +5,18 @@ export default function DetailsSection() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [display, setDisplay] = useState(false);
+  const [userImage, setUserImage] = useState("");
   useEffect(() => {
     let userData = JSON.parse(localStorage.getItem("userData"));
     setName(userData.first_name);
     setEmail(userData.email);
+    setUserImage(userData.image);
   }, [])
   return (
     <div className="detailsWrapper">
-      {display && <SimpleDialogDemo setDisplay={setDisplay} pageName="profileUpdate" /> }
+      {display && <SimpleDialogDemo setDisplay={setDisplay} pageName="profileUpdate" setName={setName} setUserImage={setUserImage} /> }
       <div className="profileImage" onClick={()=> setDisplay(true)}>
-        <svg
+        {userImage==="" ? <svg
           class="MuiSvgIcon-root MuiAvatar-fallback"
           focusable="false"
           viewBox="0 0 24 24"
@@ -22,7 +24,7 @@ export default function DetailsSection() {
           style={{ overflow: "auto" }}
         >
           <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"></path>
-        </svg>
+        </svg> : <img src={`http://localhost:5000/${userImage}`} className="customUserImage" />}
       </div>
       <div style={{ marginLeft: "1.5rem", marginRight: "70rem" }}>
         <h2
