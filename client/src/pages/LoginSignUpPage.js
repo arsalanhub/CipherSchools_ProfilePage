@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
@@ -10,6 +10,12 @@ export default function LoginSignUpPage() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [phone, setPhone] = useState("");
+
+  useEffect(() => {
+    let data = localStorage.getItem("userData");
+    if(data) navigate("/profile");
+  }, [])
+
   const loginHandler = async () => {
     let { data } = await axios.post("http://localhost:5000/login", {
       email,

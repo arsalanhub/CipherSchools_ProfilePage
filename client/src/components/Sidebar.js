@@ -8,6 +8,7 @@ import InsertEmoticonIcon from '@mui/icons-material/InsertEmoticon';
 import CopyrightIcon from '@mui/icons-material/Copyright';
 import MessageIcon from '@mui/icons-material/Message';
 import TourIcon from '@mui/icons-material/Tour';
+import { useNavigate } from 'react-router-dom';
 
 export default function Sidebar() {
   let sideBarEle = [
@@ -21,6 +22,7 @@ export default function Sidebar() {
     { text: "Feedback", img: <MessageIcon /> },
     { text: "Tour", img: <TourIcon /> },
   ]
+  const navigate = useNavigate();
   return (
     <div className='sidebarWrapper'>
         {sideBarEle.map((ele, idx) => {
@@ -31,6 +33,7 @@ export default function Sidebar() {
                 </div>
             )
         })}
+        <div onClick={()=>{ localStorage.removeItem("userData"); navigate("/")}} style={{marginTop: "1rem", cursor: "pointer" }}>Logout</div>
     </div>
   )
 }
